@@ -8,6 +8,7 @@ public class Exam {
         private String courseID;
         private int examDuration;
         private List<Exam> conflicts;
+    private List<Classroom> assignedClassrooms; // New field to store assigned classrooms
 
         public Exam(List<Integer> studentIDs, String professorName, String courseID, int examDuration) {
             this.studentIDs = studentIDs;
@@ -15,6 +16,7 @@ public class Exam {
             this.courseID = courseID;
             this.examDuration = examDuration;
             this.conflicts = new ArrayList<>();
+            this.assignedClassrooms = new ArrayList<Classroom>();
         }
 
         // Methods to add and get conflicts
@@ -45,6 +47,19 @@ public class Exam {
 
         public int getNumberOfStudents() {
         return studentIDs.size();
+    }
+
+    public void setAssignedClassrooms(List<Classroom> classrooms) {
+        this.assignedClassrooms = classrooms;
+    }
+
+    // Method to get the assigned classrooms
+    public List<Classroom> getAssignedClassrooms() {
+        return assignedClassrooms;
+    }
+
+    public int calculateRequiredClassrooms(int classroomCapacity) {
+        return (int) Math.ceil((double) getNumberOfStudents() / (classroomCapacity / 2));
     }
 
 }
